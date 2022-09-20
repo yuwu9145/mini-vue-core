@@ -1,0 +1,37 @@
+<script>
+// initial obj
+const obj = { 
+  foo: 1,
+  bar: 2
+}
+let sum = 0
+
+const bucket = new WeakMap()
+let activeEffect = undefined
+
+function effect(fn) {
+  // implement effect
+  fn()
+}
+
+function track() {
+  // implement track
+}
+
+function trigger() {
+  // implement trigger
+}
+
+// implement proxy
+const proxiedObj = new Proxy(obj, {
+
+})
+
+effect(() => {
+  sum = obj.foo + obj.bar
+})
+
+console.log('sum:', sum) // output: 3
+obj.foo = 2
+console.log('sum:', sum) // output: 4
+</script>
