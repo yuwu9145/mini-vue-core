@@ -1,0 +1,22 @@
+<script type="module">
+import { reactive, effect } from './reactive.js'
+// initial obj
+const obj = { 
+  foo: 1,
+  bar: 2
+}
+let sum = 0
+
+// implement proxy
+const proxiedObj = reactive(obj) 
+
+effect(() => {
+  sum = proxiedObj.foo + proxiedObj.bar
+})
+
+console.log('sum:', sum) // output: 3
+proxiedObj.foo = 2
+console.log('sum:', sum) // output: 4
+proxiedObj.foo = 3 
+console.log('sum:', sum) // output: 5 
+</script>
