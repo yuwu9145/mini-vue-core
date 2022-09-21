@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/yuwu9145/mini-vue-core#readme",
   "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
+    "babel-jest": "^29.0.3",
     "jest": "^29.0.3"
   }
 }

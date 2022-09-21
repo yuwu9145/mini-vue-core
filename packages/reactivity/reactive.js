@@ -1,11 +1,5 @@
-// initial obj
-const obj = { 
-  foo: 1,
-  bar: 2
-}
-let sum = 0
-
 const bucket = new WeakMap()
+
 let activeEffect = undefined
 
 export function effect(fn) {
@@ -29,14 +23,15 @@ function track(target, key) {
     deps = new Set()
     depMap.set(key, deps)
   }
-  deps.add(activeEffect)
+
+  if (activeEffect) deps.add(activeEffect)
 }
 
 function trigger(target, key) {
   // implement trigger
-  let depMap = bucket.get(target)
+  const depMap = bucket.get(target)
   if (!depMap) return
-  let deps = depMap.get(key)
+  const deps = depMap.get(key)
   if (!deps) return
   for(let fn of deps) {
     fn()
@@ -46,6 +41,7 @@ function trigger(target, key) {
 export function reactive(obj) {
   return new Proxy(obj, {
     get(target, key) {
+      if (!activeEffect) return target[key]
       track(target, key)
       return target[key]
     },
@@ -56,16 +52,3 @@ export function reactive(obj) {
     }
   })
 }
-
-// implement proxy
-const proxiedObj = reactive(obj) 
-
-effect(() => {
-  sum = proxiedObj.foo + proxiedObj.bar
-})
-
-console.log('sum:', sum) // output: 3
-proxiedObj.foo = 2
-console.log('sum:', sum) // output: 4
-proxiedObj.foo = 3 
-console.log('sum:', sum) // output: 5
