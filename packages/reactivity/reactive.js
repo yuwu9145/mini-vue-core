@@ -2,11 +2,15 @@ const bucket = new WeakMap()
 
 let activeEffect = undefined
 
-export function effect(fn) {
+export function effect(fn, options = {}) {
   // implement effect
-  activeEffect = fn 
-  fn()
-  activeEffect = undefined
+  const effectFn = () => {
+    activeEffect = effectFn
+    fn()
+    activeEffect = undefined
+  }
+  effectFn.options = options
+  effectFn()
 }
 
 function track(target, key) {
@@ -24,7 +28,7 @@ function track(target, key) {
     depMap.set(key, deps)
   }
 
-  if (activeEffect) deps.add(activeEffect)
+  deps.add(activeEffect)
 }
 
 function trigger(target, key) {
@@ -34,7 +38,10 @@ function trigger(target, key) {
   const deps = depMap.get(key)
   if (!deps) return
   for(let fn of deps) {
-    fn()
+    if (fn.options.scheduler)
+      fn.options.scheduler(fn)
+    else
+      fn()
   }
 }
 
