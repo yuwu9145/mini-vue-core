@@ -27,11 +27,11 @@ test('STEP ONE: basic reactive', () => {
 test('STEP TWO: scheduler', () => {
   let dummy
   let run
-  const scheduler = jest.fn(effectFn => {
-    run = effectFn
+  const scheduler = jest.fn(() => {
+    run = runner
   })
   const obj = reactive({ foo: 1 })
-  effect(
+  const runner = effect(
     () => {
       dummy = obj.foo
     },

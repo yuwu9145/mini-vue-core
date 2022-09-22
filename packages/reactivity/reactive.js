@@ -11,6 +11,7 @@ export function effect(fn, options = {}) {
   }
   effectFn.options = options
   effectFn()
+  return effectFn
 }
 
 function track(target, key) {
@@ -39,7 +40,7 @@ function trigger(target, key) {
   if (!deps) return
   for(let fn of deps) {
     if (fn.options.scheduler)
-      fn.options.scheduler(fn)
+      fn.options.scheduler()
     else
       fn()
   }
