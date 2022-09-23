@@ -52,13 +52,14 @@ test('STEP TWO: scheduler', () => {
 
 // real test case from vue core source code 
 // https://github.com/vuejs/core/blob/8772a01a9280b1591e781e20741d32e2f9a836c8/packages/reactivity/__tests__/effect.spec.ts
-it('STEP TWO: lazy', () => {
+it('STEP THREE: lazy', () => {
     const obj = reactive({ foo: 1 })
     let dummy
     const runner = effect(() => (dummy = obj.foo), { lazy: true })
     expect(dummy).toBe(undefined)
 
-    expect(runner()).toBe(1)
+    runner()
+    // expect(runner()).toBe(1)
     expect(dummy).toBe(1)
     obj.foo = 2
     expect(dummy).toBe(2)

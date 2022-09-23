@@ -10,7 +10,10 @@ export function effect(fn, options = {}) {
     activeEffect = undefined
   }
   effectFn.options = options
-  effectFn()
+
+  if (!effectFn.options.lazy)
+    effectFn()
+  
   return effectFn
 }
 
