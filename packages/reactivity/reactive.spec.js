@@ -22,7 +22,7 @@ test('STEP ONE: basic reactive', () => {
   expect(sum).toBe(5)
 })
 
-// Simplied version based on vue core source code 
+// real test case from vue core source code 
 // https://github.com/vuejs/core/blob/8772a01a9280b1591e781e20741d32e2f9a836c8/packages/reactivity/__tests__/effect.spec.ts
 test('STEP TWO: scheduler', () => {
   let dummy
@@ -49,3 +49,17 @@ test('STEP TWO: scheduler', () => {
   // should have run
   expect(dummy).toBe(2)
 })
+
+// real test case from vue core source code 
+// https://github.com/vuejs/core/blob/8772a01a9280b1591e781e20741d32e2f9a836c8/packages/reactivity/__tests__/effect.spec.ts
+it('STEP TWO: lazy', () => {
+    const obj = reactive({ foo: 1 })
+    let dummy
+    const runner = effect(() => (dummy = obj.foo), { lazy: true })
+    expect(dummy).toBe(undefined)
+
+    expect(runner()).toBe(1)
+    expect(dummy).toBe(1)
+    obj.foo = 2
+    expect(dummy).toBe(2)
+  })
