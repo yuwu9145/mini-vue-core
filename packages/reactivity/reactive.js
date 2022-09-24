@@ -5,9 +5,11 @@ let activeEffect = undefined
 export function effect(fn, options = {}) {
   // implement effect
   const effectFn = () => {
+    let result
     activeEffect = effectFn
-    fn()
+    result = fn()
     activeEffect = undefined
+    return result
   }
   effectFn.options = options
 
@@ -62,4 +64,14 @@ export function reactive(obj) {
       return true
     }
   })
+}
+
+export function computed(fn) {
+  const effectFn = effect(fn, { lazy: true })
+  let obj = {
+    get value() {
+      return effectFn()
+    }
+  }
+  return obj
 }
