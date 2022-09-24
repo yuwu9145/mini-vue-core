@@ -1,6 +1,5 @@
 import { reactive, effect } from './reactive.js'
 
-
 test('STEP ONE: basic reactive', () => {
   // initial obj
   const obj = { 
@@ -50,17 +49,70 @@ test('STEP TWO: scheduler', () => {
   expect(dummy).toBe(2)
 })
 
-// real test case from vue core source code 
+// modified real test case from vue core source code 
 // https://github.com/vuejs/core/blob/8772a01a9280b1591e781e20741d32e2f9a836c8/packages/reactivity/__tests__/effect.spec.ts
 it('STEP THREE: lazy', () => {
-    const obj = reactive({ foo: 1 })
-    let dummy
-    const runner = effect(() => (dummy = obj.foo), { lazy: true })
-    expect(dummy).toBe(undefined)
+  const obj = reactive({ foo: 1 })
+  let dummy
+  const runner = effect(() => (dummy = obj.foo), { lazy: true })
+  expect(dummy).toBe(undefined)
 
-    runner()
-    // expect(runner()).toBe(1)
-    expect(dummy).toBe(1)
-    obj.foo = 2
-    expect(dummy).toBe(2)
+  runner()
+  // expect(runner()).toBe(1)
+  expect(dummy).toBe(1)
+  obj.foo = 2
+  expect(dummy).toBe(2)
+})
+
+
+// Computed
+// real test case from vue core source code 
+it('should return updated value', () => {
+  const value = reactive({})
+  const cValue = computed(() => value.foo)
+  expect(cValue.value).toBe(undefined)
+  value.foo = 1
+  expect(cValue.value).toBe(1)
+})
+
+// real test case from vue core source code 
+it('should compute lazily', () => {
+  const value = reactive({})
+  const getter = jest.fn(() => value.foo)
+  const cValue = computed(getter)
+
+  // lazy
+  expect(getter).not.toHaveBeenCalled()
+
+  expect(cValue.value).toBe(undefined)
+  expect(getter).toHaveBeenCalledTimes(1)
+
+  // should not compute again
+  cValue.value
+  expect(getter).toHaveBeenCalledTimes(1)
+
+  // should not compute until needed
+  value.foo = 1
+  expect(getter).toHaveBeenCalledTimes(1)
+
+  // now it should compute
+  expect(cValue.value).toBe(1)
+  expect(getter).toHaveBeenCalledTimes(2)
+
+  // should not compute again
+  cValue.value
+  expect(getter).toHaveBeenCalledTimes(2)
+})
+
+// real test case from vue core source code 
+it('should trigger effect', () => {
+  const value = reactive({})
+  const cValue = computed(() => value.foo)
+  let dummy
+  effect(() => {
+    dummy = cValue.value
   })
+  expect(dummy).toBe(undefined)
+  value.foo = 1
+  expect(dummy).toBe(1)
+})
