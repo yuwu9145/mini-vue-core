@@ -67,7 +67,7 @@ it('STEP THREE: lazy', () => {
 
 // Computed
 // real test case from vue core source code 
-it('should return updated value', () => {
+it('STEP FOUR: (computed) should return updated value', () => {
   const value = reactive({})
   const cValue = computed(() => value.foo)
   expect(cValue.value).toBe(undefined)
@@ -76,7 +76,7 @@ it('should return updated value', () => {
 })
 
 // real test case from vue core source code 
-it('should compute lazily', () => {
+it('STEP FIVE: (computed) should compute lazily', () => {
   const value = reactive({})
   const getter = jest.fn(() => value.foo)
   const cValue = computed(getter)
