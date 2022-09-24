@@ -67,10 +67,21 @@ export function reactive(obj) {
 }
 
 export function computed(fn) {
-  const effectFn = effect(fn, { lazy: true })
+  let dirty = true
+  let value
+  const effectFn = effect(fn, { 
+    lazy: true,
+    scheduler: () => {
+      dirty = true
+    }
+  })
   let obj = {
     get value() {
-      return effectFn()
+      if (dirty) {
+        value = effectFn()
+        dirty = false
+      }
+      return value
     }
   }
   return obj
