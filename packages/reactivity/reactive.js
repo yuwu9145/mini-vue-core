@@ -86,3 +86,7 @@ export function computed(fn) {
   }
   return obj
 }
+
+export function ref(value) {
+  return reactive({value})
+}
