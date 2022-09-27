@@ -157,7 +157,7 @@ describe('STEP SIX: reactivity/ref', () => {
     expect(dummy).toBe(2)
   })
 
-  xit('should work without initial value', () => {
+  it('should work without initial value', () => {
     const a = ref()
     let dummy
     effect(() => {
