@@ -88,5 +88,34 @@ export function computed(fn) {
 }
 
 export function ref(value) {
-  return reactive({value})
+  const wrapper = reactive({value})
+  Object.defineProperty(wrapper, '__v_isRef', {
+    value: true,
+    writable: false
+  })
+  return wrapper
+}
+
+export function isRef(r) {
+  return r && r.__v_isRef
+}
+
+export function toRef(target, key, defaultValue) {
+  const val = target[key]
+  if (isRef(val))
+    return val
+
+  const wrapper = {
+    get value() {
+      return target[key] ?? defaultValue
+    },
+    set value(newValue) {
+      target[key] = newValue
+    }
+  }
+  Object.defineProperty(wrapper, '__v_isRef', {
+    value: true,
+    writable: false
+  })
+  return wrapper 
 }
