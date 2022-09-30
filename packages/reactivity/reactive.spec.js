@@ -4,6 +4,7 @@ import {
   computed,
   ref,
   toRef,
+  toRefs,
   isRef
 } from './reactive.js'
 
@@ -249,7 +250,7 @@ describe('STEP SIX: reactivity/ref', () => {
     expect(x.value).toBe(1)
   })
 
-  xtest('toRefs', () => {
+  test('toRefs', () => {
     const a = reactive({
       x: 1,
       y: 2
@@ -290,7 +291,7 @@ describe('STEP SIX: reactivity/ref', () => {
     expect(dummyY).toBe(5)
   })
 
-  xtest('toRefs reactive array', () => {
+  test('toRefs reactive array', () => {
     const arr = reactive(['a', 'b', 'c'])
     const refs = toRefs(arr)
 

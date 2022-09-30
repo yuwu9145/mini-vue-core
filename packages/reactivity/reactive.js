@@ -119,3 +119,13 @@ export function toRef(target, key, defaultValue) {
   })
   return wrapper 
 }
+export function toRefs(target) {
+  const wrapper = Array.isArray(target) ? [] : {}
+  const props = Object.keys(target)
+
+  for (const p of props) {
+    wrapper[p] = toRef(target, p)
+  }
+
+  return wrapper
+}
