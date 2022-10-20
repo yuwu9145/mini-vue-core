@@ -7,8 +7,10 @@ describe('renderer: element', () => {
   })
 
   it('should create an element', () => {
-    render(h('div'), root)
-    expect(inner(root)).toBe('<div></div>')
+    render({
+      type: 'div'
+    }, root)
+    expect(root.innerHTML).toBe('<div></div>')
   })
 
   // it('should create an element with props', () => {
