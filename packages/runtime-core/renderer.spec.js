@@ -29,10 +29,14 @@ describe('renderer: element', () => {
     expect(root.innerHTML).toBe('<div>foo bar</div>')
   })
 
-  // it('should create an element with direct text children and props', () => {
-  //   render(h('div', { id: 'foo' }, ['bar']), root)
-  //   expect(inner(root)).toBe('<div id="foo">bar</div>')
-  // })
+  it('should create an element with direct text children and props', () => {
+    render({
+      type: 'div',
+      props: { id: 'foo' },
+      children: ['bar']
+    }, root)
+    expect(root.innerHTML).toBe('<div id="foo">bar</div>')
+  })
 
   // it('should update an element tag which is already mounted', () => {
   //   render(h('div', ['foo']), root)
