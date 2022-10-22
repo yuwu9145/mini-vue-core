@@ -1,7 +1,7 @@
-import { render } from './renderer'
+import { createRenderer } from './renderer'
 describe('renderer: element', () => {
   let root
-
+  const render = createRenderer().render
   beforeEach(() => {
     root = document.createElement('div')
   })
