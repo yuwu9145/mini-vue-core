@@ -52,11 +52,19 @@ describe('renderer: element', () => {
     expect(root.innerHTML).toBe('<span>foo</span>')
   })
 
-  // it('should update element props which is already mounted', () => {
-  //   render(h('div', { id: 'bar' }, ['foo']), root)
-  //   expect(inner(root)).toBe('<div id="bar">foo</div>')
+  it('should update element props which is already mounted', () => {
+    render({
+      type: 'div',
+      props: { id: 'bar' },
+      children: ['foo']
+    }, root)
+    expect(root.innerHTML).toBe('<div id="bar">foo</div>')
 
-  //   render(h('div', { id: 'baz', class: 'bar' }, ['foo']), root)
-  //   expect(inner(root)).toBe('<div id="baz" class="bar">foo</div>')
-  // })
+    render({
+      type: 'div',
+      props: { id: 'baz', class: 'bar' },
+      children: ['foo']
+    }, root)
+    expect(root.innerHTML).toBe('<div id="baz" class="bar">foo</div>')
+  })
 })
