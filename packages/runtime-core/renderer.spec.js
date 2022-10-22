@@ -13,10 +13,13 @@ describe('renderer: element', () => {
     expect(root.innerHTML).toBe('<div></div>')
   })
 
-  // it('should create an element with props', () => {
-  //   render(h('div', { id: 'foo', class: 'bar' }), root)
-  //   expect(inner(root)).toBe('<div id="foo" class="bar"></div>')
-  // })
+  it('should create an element with props', () => {
+    render({
+      type: 'div',
+      props: { id: 'foo', class: 'bar' }
+    }, root)
+    expect(root.innerHTML).toBe('<div id="foo" class="bar"></div>')
+  })
 
   // it('should create an element with direct text children', () => {
   //   render(h('div', ['foo', ' ', 'bar']), root)
