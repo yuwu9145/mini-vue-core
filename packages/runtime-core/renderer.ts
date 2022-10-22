@@ -18,12 +18,16 @@ export function createRenderer() {
     container.appendChild(el)
   }
 
-  function patch(n1 = null, n2, container) {
+  function patch(n1 = undefined, n2, container) {
+    if (n1) {
+      container.innerHTML = ''
+    }
     mountElement(n2, container) 
   }
 
   function render(vnode, container) {
-    patch(null, vnode, container) 
+    patch(container._vnode, vnode, container) 
+    container._vnode = vnode
   }
 
   return {
