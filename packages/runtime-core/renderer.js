@@ -3,15 +3,17 @@ export function createRenderer() {
   function mountElement(vnode, container) {
     const el = document.createElement(vnode.type)
 
-    if (vnode.children && vnode.children.length) {
-      for (const child of vnode.children) {
+    if ( typeof vnode.children === 'string') {
+      el.textContent = `${el.textContent }${vnode.children}`
+    } else if (Array.isArray(vnode.children)) {
+      vnode.children.forEach(child => {
         if (typeof child === 'string') {
           el.textContent = `${el.textContent }${child}`
         } else {
           patch(null, child, el)
         }
-      }
-    } 
+      });
+    }
     
     if (vnode.props) {
       for (const key of Object.keys(vnode.props) ) {

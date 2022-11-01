@@ -80,376 +80,376 @@ describe('renderer: children', () => {
     expect(root.innerHTML).toBe('<div>hello</div>')
   })
 
-  // describe('renderer: keyed children', () => {
-  //   let root: TestElement
-  //   let elm: TestElement
-  //   const renderChildren = (arr: number[]) => {
-  //     render(h('div', arr.map(toSpan)), root)
-  //     return root.children[0] as TestElement
-  //   }
+  describe('renderer: keyed children', () => {
+    // let root: TestElement
+    // let elm: TestElement
+    // const renderChildren = (arr: number[]) => {
+    //   render(h('div', arr.map(toSpan)), root)
+    //   return root.children[0] as TestElement
+    // }
 
-  //   beforeEach(() => {
-  //     root = nodeOps.createElement('div')
-  //     render(h('div', { id: 1 }, 'hello'), root)
-  //   })
+    // beforeEach(() => {
+    //   root = nodeOps.createElement('div')
+    //   render(h('div', { id: 1 }, 'hello'), root)
+    // })
 
-  //   test('append', () => {
-  //     elm = renderChildren([1])
-  //     expect(elm.children.length).toBe(1)
+    // test('append', () => {
+    //   elm = renderChildren([1])
+    //   expect(elm.children.length).toBe(1)
 
-  //     elm = renderChildren([1, 2, 3])
-  //     expect(elm.children.length).toBe(3)
-  //     expect(serialize(elm.children[1])).toBe('<span>2</span>')
-  //     expect(serialize(elm.children[2])).toBe('<span>3</span>')
-  //   })
+    //   elm = renderChildren([1, 2, 3])
+    //   expect(elm.children.length).toBe(3)
+    //   expect(serialize(elm.children[1])).toBe('<span>2</span>')
+    //   expect(serialize(elm.children[2])).toBe('<span>3</span>')
+    // })
 
-  //   test('prepend', () => {
-  //     elm = renderChildren([4, 5])
-  //     expect(elm.children.length).toBe(2)
+    // test('prepend', () => {
+    //   elm = renderChildren([4, 5])
+    //   expect(elm.children.length).toBe(2)
 
-  //     elm = renderChildren([1, 2, 3, 4, 5])
-  //     expect(elm.children.length).toBe(5)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '1',
-  //       '2',
-  //       '3',
-  //       '4',
-  //       '5'
-  //     ])
-  //   })
+    //   elm = renderChildren([1, 2, 3, 4, 5])
+    //   expect(elm.children.length).toBe(5)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '1',
+    //     '2',
+    //     '3',
+    //     '4',
+    //     '5'
+    //   ])
+    // })
 
-  //   test('insert in middle', () => {
-  //     elm = renderChildren([1, 2, 4, 5])
-  //     expect(elm.children.length).toBe(4)
+    // test('insert in middle', () => {
+    //   elm = renderChildren([1, 2, 4, 5])
+    //   expect(elm.children.length).toBe(4)
 
-  //     elm = renderChildren([1, 2, 3, 4, 5])
-  //     expect(elm.children.length).toBe(5)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '1',
-  //       '2',
-  //       '3',
-  //       '4',
-  //       '5'
-  //     ])
-  //   })
+    //   elm = renderChildren([1, 2, 3, 4, 5])
+    //   expect(elm.children.length).toBe(5)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '1',
+    //     '2',
+    //     '3',
+    //     '4',
+    //     '5'
+    //   ])
+    // })
 
-  //   test('insert at beginning and end', () => {
-  //     elm = renderChildren([2, 3, 4])
-  //     expect(elm.children.length).toBe(3)
+    // test('insert at beginning and end', () => {
+    //   elm = renderChildren([2, 3, 4])
+    //   expect(elm.children.length).toBe(3)
 
-  //     elm = renderChildren([1, 2, 3, 4, 5])
-  //     expect(elm.children.length).toBe(5)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '1',
-  //       '2',
-  //       '3',
-  //       '4',
-  //       '5'
-  //     ])
-  //   })
+    //   elm = renderChildren([1, 2, 3, 4, 5])
+    //   expect(elm.children.length).toBe(5)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '1',
+    //     '2',
+    //     '3',
+    //     '4',
+    //     '5'
+    //   ])
+    // })
 
-  //   test('insert to empty parent', () => {
-  //     elm = renderChildren([])
-  //     expect(elm.children.length).toBe(0)
+    // test('insert to empty parent', () => {
+    //   elm = renderChildren([])
+    //   expect(elm.children.length).toBe(0)
 
-  //     elm = renderChildren([1, 2, 3, 4, 5])
-  //     expect(elm.children.length).toBe(5)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '1',
-  //       '2',
-  //       '3',
-  //       '4',
-  //       '5'
-  //     ])
-  //   })
+    //   elm = renderChildren([1, 2, 3, 4, 5])
+    //   expect(elm.children.length).toBe(5)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '1',
+    //     '2',
+    //     '3',
+    //     '4',
+    //     '5'
+    //   ])
+    // })
 
-  //   test('remove all children from parent', () => {
-  //     elm = renderChildren([1, 2, 3, 4, 5])
-  //     expect(elm.children.length).toBe(5)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '1',
-  //       '2',
-  //       '3',
-  //       '4',
-  //       '5'
-  //     ])
+    // test('remove all children from parent', () => {
+    //   elm = renderChildren([1, 2, 3, 4, 5])
+    //   expect(elm.children.length).toBe(5)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '1',
+    //     '2',
+    //     '3',
+    //     '4',
+    //     '5'
+    //   ])
 
-  //     render(h('div'), root)
-  //     expect(elm.children.length).toBe(0)
-  //   })
+    //   render(h('div'), root)
+    //   expect(elm.children.length).toBe(0)
+    // })
 
-  //   test('remove from beginning', () => {
-  //     elm = renderChildren([1, 2, 3, 4, 5])
-  //     expect(elm.children.length).toBe(5)
+    // test('remove from beginning', () => {
+    //   elm = renderChildren([1, 2, 3, 4, 5])
+    //   expect(elm.children.length).toBe(5)
 
-  //     elm = renderChildren([3, 4, 5])
-  //     expect(elm.children.length).toBe(3)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual(['3', '4', '5'])
-  //   })
+    //   elm = renderChildren([3, 4, 5])
+    //   expect(elm.children.length).toBe(3)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual(['3', '4', '5'])
+    // })
 
-  //   test('remove from end', () => {
-  //     elm = renderChildren([1, 2, 3, 4, 5])
-  //     expect(elm.children.length).toBe(5)
+    // test('remove from end', () => {
+    //   elm = renderChildren([1, 2, 3, 4, 5])
+    //   expect(elm.children.length).toBe(5)
 
-  //     elm = renderChildren([1, 2, 3])
-  //     expect(elm.children.length).toBe(3)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual(['1', '2', '3'])
-  //   })
+    //   elm = renderChildren([1, 2, 3])
+    //   expect(elm.children.length).toBe(3)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual(['1', '2', '3'])
+    // })
 
-  //   test('remove from middle', () => {
-  //     elm = renderChildren([1, 2, 3, 4, 5])
-  //     expect(elm.children.length).toBe(5)
+    // test('remove from middle', () => {
+    //   elm = renderChildren([1, 2, 3, 4, 5])
+    //   expect(elm.children.length).toBe(5)
 
-  //     elm = renderChildren([1, 2, 4, 5])
-  //     expect(elm.children.length).toBe(4)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '1',
-  //       '2',
-  //       '4',
-  //       '5'
-  //     ])
-  //   })
+    //   elm = renderChildren([1, 2, 4, 5])
+    //   expect(elm.children.length).toBe(4)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '1',
+    //     '2',
+    //     '4',
+    //     '5'
+    //   ])
+    // })
 
-  //   test('moving single child forward', () => {
-  //     elm = renderChildren([1, 2, 3, 4])
-  //     expect(elm.children.length).toBe(4)
+    // test('moving single child forward', () => {
+    //   elm = renderChildren([1, 2, 3, 4])
+    //   expect(elm.children.length).toBe(4)
 
-  //     elm = renderChildren([2, 3, 1, 4])
-  //     expect(elm.children.length).toBe(4)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '2',
-  //       '3',
-  //       '1',
-  //       '4'
-  //     ])
-  //   })
+    //   elm = renderChildren([2, 3, 1, 4])
+    //   expect(elm.children.length).toBe(4)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '2',
+    //     '3',
+    //     '1',
+    //     '4'
+    //   ])
+    // })
 
-  //   test('moving single child backwards', () => {
-  //     elm = renderChildren([1, 2, 3, 4])
-  //     expect(elm.children.length).toBe(4)
+    // test('moving single child backwards', () => {
+    //   elm = renderChildren([1, 2, 3, 4])
+    //   expect(elm.children.length).toBe(4)
 
-  //     elm = renderChildren([1, 4, 2, 3])
-  //     expect(elm.children.length).toBe(4)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '1',
-  //       '4',
-  //       '2',
-  //       '3'
-  //     ])
-  //   })
+    //   elm = renderChildren([1, 4, 2, 3])
+    //   expect(elm.children.length).toBe(4)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '1',
+    //     '4',
+    //     '2',
+    //     '3'
+    //   ])
+    // })
 
-  //   test('moving single child to end', () => {
-  //     elm = renderChildren([1, 2, 3])
-  //     expect(elm.children.length).toBe(3)
+    // test('moving single child to end', () => {
+    //   elm = renderChildren([1, 2, 3])
+    //   expect(elm.children.length).toBe(3)
 
-  //     elm = renderChildren([2, 3, 1])
-  //     expect(elm.children.length).toBe(3)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual(['2', '3', '1'])
-  //   })
+    //   elm = renderChildren([2, 3, 1])
+    //   expect(elm.children.length).toBe(3)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual(['2', '3', '1'])
+    // })
 
-  //   test('swap first and last', () => {
-  //     elm = renderChildren([1, 2, 3, 4])
-  //     expect(elm.children.length).toBe(4)
+    // test('swap first and last', () => {
+    //   elm = renderChildren([1, 2, 3, 4])
+    //   expect(elm.children.length).toBe(4)
 
-  //     elm = renderChildren([4, 2, 3, 1])
-  //     expect(elm.children.length).toBe(4)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '4',
-  //       '2',
-  //       '3',
-  //       '1'
-  //     ])
-  //   })
+    //   elm = renderChildren([4, 2, 3, 1])
+    //   expect(elm.children.length).toBe(4)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '4',
+    //     '2',
+    //     '3',
+    //     '1'
+    //   ])
+    // })
 
-  //   test('move to left & replace', () => {
-  //     elm = renderChildren([1, 2, 3, 4, 5])
-  //     expect(elm.children.length).toBe(5)
+    // test('move to left & replace', () => {
+    //   elm = renderChildren([1, 2, 3, 4, 5])
+    //   expect(elm.children.length).toBe(5)
 
-  //     elm = renderChildren([4, 1, 2, 3, 6])
-  //     expect(elm.children.length).toBe(5)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '4',
-  //       '1',
-  //       '2',
-  //       '3',
-  //       '6'
-  //     ])
-  //   })
+    //   elm = renderChildren([4, 1, 2, 3, 6])
+    //   expect(elm.children.length).toBe(5)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '4',
+    //     '1',
+    //     '2',
+    //     '3',
+    //     '6'
+    //   ])
+    // })
 
-  //   test('move to left and leaves hold', () => {
-  //     elm = renderChildren([1, 4, 5])
-  //     expect(elm.children.length).toBe(3)
+    // test('move to left and leaves hold', () => {
+    //   elm = renderChildren([1, 4, 5])
+    //   expect(elm.children.length).toBe(3)
 
-  //     elm = renderChildren([4, 6])
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual(['4', '6'])
-  //   })
+    //   elm = renderChildren([4, 6])
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual(['4', '6'])
+    // })
 
-  //   test('moved and set to undefined element ending at the end', () => {
-  //     elm = renderChildren([2, 4, 5])
-  //     expect(elm.children.length).toBe(3)
+    // test('moved and set to undefined element ending at the end', () => {
+    //   elm = renderChildren([2, 4, 5])
+    //   expect(elm.children.length).toBe(3)
 
-  //     elm = renderChildren([4, 5, 3])
-  //     expect(elm.children.length).toBe(3)
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual(['4', '5', '3'])
-  //   })
+    //   elm = renderChildren([4, 5, 3])
+    //   expect(elm.children.length).toBe(3)
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual(['4', '5', '3'])
+    // })
 
-  //   test('reverse element', () => {
-  //     elm = renderChildren([1, 2, 3, 4, 5, 6, 7, 8])
-  //     expect(elm.children.length).toBe(8)
+    // test('reverse element', () => {
+    //   elm = renderChildren([1, 2, 3, 4, 5, 6, 7, 8])
+    //   expect(elm.children.length).toBe(8)
 
-  //     elm = renderChildren([8, 7, 6, 5, 4, 3, 2, 1])
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '8',
-  //       '7',
-  //       '6',
-  //       '5',
-  //       '4',
-  //       '3',
-  //       '2',
-  //       '1'
-  //     ])
-  //   })
+    //   elm = renderChildren([8, 7, 6, 5, 4, 3, 2, 1])
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '8',
+    //     '7',
+    //     '6',
+    //     '5',
+    //     '4',
+    //     '3',
+    //     '2',
+    //     '1'
+    //   ])
+    // })
 
-  //   test('something', () => {
-  //     elm = renderChildren([0, 1, 2, 3, 4, 5])
-  //     expect(elm.children.length).toBe(6)
+    // test('something', () => {
+    //   elm = renderChildren([0, 1, 2, 3, 4, 5])
+    //   expect(elm.children.length).toBe(6)
 
-  //     elm = renderChildren([4, 3, 2, 1, 5, 0])
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       '4',
-  //       '3',
-  //       '2',
-  //       '1',
-  //       '5',
-  //       '0'
-  //     ])
-  //   })
+    //   elm = renderChildren([4, 3, 2, 1, 5, 0])
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     '4',
+    //     '3',
+    //     '2',
+    //     '1',
+    //     '5',
+    //     '0'
+    //   ])
+    // })
 
-  //   test('random shuffle', () => {
-  //     const elms = 14
-  //     const samples = 5
-  //     const arr = [...Array(elms).keys()]
-  //     const opacities: string[] = []
+    // test('random shuffle', () => {
+    //   const elms = 14
+    //   const samples = 5
+    //   const arr = [...Array(elms).keys()]
+    //   const opacities: string[] = []
 
-  //     function spanNumWithOpacity(n: number, o: string) {
-  //       return h('span', { key: n, style: { opacity: o } }, n.toString())
-  //     }
+    //   function spanNumWithOpacity(n: number, o: string) {
+    //     return h('span', { key: n, style: { opacity: o } }, n.toString())
+    //   }
 
-  //     for (let n = 0; n < samples; ++n) {
-  //       render(
-  //         h(
-  //           'span',
-  //           arr.map(n => spanNumWithOpacity(n, '1'))
-  //         ),
-  //         root
-  //       )
-  //       elm = root.children[0] as TestElement
+    //   for (let n = 0; n < samples; ++n) {
+    //     render(
+    //       h(
+    //         'span',
+    //         arr.map(n => spanNumWithOpacity(n, '1'))
+    //       ),
+    //       root
+    //     )
+    //     elm = root.children[0] as TestElement
 
-  //       for (let i = 0; i < elms; ++i) {
-  //         expect(serializeInner(elm.children[i] as TestElement)).toBe(
-  //           i.toString()
-  //         )
-  //         opacities[i] = Math.random().toFixed(5).toString()
-  //       }
+    //     for (let i = 0; i < elms; ++i) {
+    //       expect(serializeInner(elm.children[i] as TestElement)).toBe(
+    //         i.toString()
+    //       )
+    //       opacities[i] = Math.random().toFixed(5).toString()
+    //     }
 
-  //       const shufArr = shuffle(arr.slice(0))
-  //       render(
-  //         h(
-  //           'span',
-  //           arr.map(n => spanNumWithOpacity(shufArr[n], opacities[n]))
-  //         ),
-  //         root
-  //       )
-  //       elm = root.children[0] as TestElement
-  //       for (let i = 0; i < elms; ++i) {
-  //         expect(serializeInner(elm.children[i] as TestElement)).toBe(
-  //           shufArr[i].toString()
-  //         )
-  //         expect(elm.children[i]).toMatchObject({
-  //           props: {
-  //             style: {
-  //               opacity: opacities[i]
-  //             }
-  //           }
-  //         })
-  //       }
-  //     }
-  //   })
+    //     const shufArr = shuffle(arr.slice(0))
+    //     render(
+    //       h(
+    //         'span',
+    //         arr.map(n => spanNumWithOpacity(shufArr[n], opacities[n]))
+    //       ),
+    //       root
+    //     )
+    //     elm = root.children[0] as TestElement
+    //     for (let i = 0; i < elms; ++i) {
+    //       expect(serializeInner(elm.children[i] as TestElement)).toBe(
+    //         shufArr[i].toString()
+    //       )
+    //       expect(elm.children[i]).toMatchObject({
+    //         props: {
+    //           style: {
+    //             opacity: opacities[i]
+    //           }
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
 
-  //   test('children with the same key but with different tag', () => {
-  //     render(
-  //       h('div', [
-  //         h('div', { key: 1 }, 'one'),
-  //         h('div', { key: 2 }, 'two'),
-  //         h('div', { key: 3 }, 'three'),
-  //         h('div', { key: 4 }, 'four')
-  //       ]),
-  //       root
-  //     )
-  //     elm = root.children[0] as TestElement
-  //     expect((elm.children as TestElement[]).map(c => c.tag)).toEqual([
-  //       'div',
-  //       'div',
-  //       'div',
-  //       'div'
-  //     ])
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       'one',
-  //       'two',
-  //       'three',
-  //       'four'
-  //     ])
+    // test('children with the same key but with different tag', () => {
+    //   render(
+    //     h('div', [
+    //       h('div', { key: 1 }, 'one'),
+    //       h('div', { key: 2 }, 'two'),
+    //       h('div', { key: 3 }, 'three'),
+    //       h('div', { key: 4 }, 'four')
+    //     ]),
+    //     root
+    //   )
+    //   elm = root.children[0] as TestElement
+    //   expect((elm.children as TestElement[]).map(c => c.tag)).toEqual([
+    //     'div',
+    //     'div',
+    //     'div',
+    //     'div'
+    //   ])
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     'one',
+    //     'two',
+    //     'three',
+    //     'four'
+    //   ])
 
-  //     render(
-  //       h('div', [
-  //         h('div', { key: 4 }, 'four'),
-  //         h('span', { key: 3 }, 'three'),
-  //         h('span', { key: 2 }, 'two'),
-  //         h('div', { key: 1 }, 'one')
-  //       ]),
-  //       root
-  //     )
-  //     expect((elm.children as TestElement[]).map(c => c.tag)).toEqual([
-  //       'div',
-  //       'span',
-  //       'span',
-  //       'div'
-  //     ])
-  //     expect((elm.children as TestElement[]).map(inner)).toEqual([
-  //       'four',
-  //       'three',
-  //       'two',
-  //       'one'
-  //     ])
-  //   })
+    //   render(
+    //     h('div', [
+    //       h('div', { key: 4 }, 'four'),
+    //       h('span', { key: 3 }, 'three'),
+    //       h('span', { key: 2 }, 'two'),
+    //       h('div', { key: 1 }, 'one')
+    //     ]),
+    //     root
+    //   )
+    //   expect((elm.children as TestElement[]).map(c => c.tag)).toEqual([
+    //     'div',
+    //     'span',
+    //     'span',
+    //     'div'
+    //   ])
+    //   expect((elm.children as TestElement[]).map(inner)).toEqual([
+    //     'four',
+    //     'three',
+    //     'two',
+    //     'one'
+    //   ])
+    // })
 
-  //   test('children with the same tag, same key, but one with data and one without data', () => {
-  //     render(h('div', [h('div', { class: 'hi' }, 'one')]), root)
-  //     elm = root.children[0] as TestElement
-  //     expect(elm.children[0]).toMatchObject({
-  //       props: {
-  //         class: 'hi'
-  //       }
-  //     })
+    // test('children with the same tag, same key, but one with data and one without data', () => {
+    //   render(h('div', [h('div', { class: 'hi' }, 'one')]), root)
+    //   elm = root.children[0] as TestElement
+    //   expect(elm.children[0]).toMatchObject({
+    //     props: {
+    //       class: 'hi'
+    //     }
+    //   })
 
-  //     render(h('div', [h('div', 'four')]), root)
-  //     elm = root.children[0] as TestElement
-  //     expect(elm.children[0] as TestElement).toMatchObject({
-  //       props: {
-  //         // in the DOM renderer this will be ''
-  //         // but the test renderer simply sets whatever value it receives.
-  //         class: null
-  //       }
-  //     })
-  //     expect(serialize(elm.children[0])).toBe(`<div>four</div>`)
-  //   })
+    //   render(h('div', [h('div', 'four')]), root)
+    //   elm = root.children[0] as TestElement
+    //   expect(elm.children[0] as TestElement).toMatchObject({
+    //     props: {
+    //       // in the DOM renderer this will be ''
+    //       // but the test renderer simply sets whatever value it receives.
+    //       class: null
+    //     }
+    //   })
+    //   expect(serialize(elm.children[0])).toBe(`<div>four</div>`)
+    // })
 
-  //   test('should warn with duplicate keys', () => {
-  //     renderChildren([1, 2, 3, 4, 5])
-  //     renderChildren([1, 6, 6, 3, 5])
-  //     expect(`Duplicate keys`).toHaveBeenWarned()
-  //   })
-  // })
+    // test('should warn with duplicate keys', () => {
+    //   renderChildren([1, 2, 3, 4, 5])
+    //   renderChildren([1, 6, 6, 3, 5])
+    //   expect(`Duplicate keys`).toHaveBeenWarned()
+    // })
+  })
 
   // describe('renderer: unkeyed children', () => {
   //   let root: TestElement
