@@ -5,7 +5,11 @@ export function createRenderer() {
 
     if (vnode.children && vnode.children.length) {
       for (const child of vnode.children) {
-        el.textContent = `${el.textContent }${child}`
+        if (typeof child === 'string') {
+          el.textContent = `${el.textContent }${child}`
+        } else {
+          patch(null, child, el)
+        }
       }
     } 
     
