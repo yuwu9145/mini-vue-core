@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>A reactive timer running on your own vue core!</h2> 
+    <div id="app"></div>
+  </body>
+  <script type="module">
+    import { reactive, effect, ref } from './packages/reactivity/reactive.js'
+    import { createRenderer } from './packages/runtime-core/renderer.js'
+    const count = ref(1) 
+    const render = createRenderer().render
+    
+    effect(() => {
+      render({
+        type: 'h1',
+        children: `${count.value}`
+      }, document.getElementById('app'))
+    })
+
+    setInterval(() => {
+      count.value ++
+    }, 1000);
+  </script>
+</html>
