@@ -1,6 +1,6 @@
 # hand write mini-vue-core
 
-The best way to learn Vue is by understading its source code and code it by yourself.
+The best way to learn Vue is by understading its source code and code it yourself.
 
 ### Why this repo?
 - It implements reactivity & render api against real test cases copied from Vue 3 Core source code
