@@ -21,7 +21,7 @@ export function createRenderer() {
       }
     }
     
-    container.appendChild(el)
+    container.insertBefore(el, null)
   }
 
   function patch(n1 = undefined, n2, container) {
