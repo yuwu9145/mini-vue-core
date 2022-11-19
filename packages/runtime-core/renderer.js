@@ -1,7 +1,7 @@
 export function createRenderer() {
 
   function mountElement(vnode, container) {
-    const el = document.createElement(vnode.type)
+    const el = vnode.el = document.createElement(vnode.type)
 
     if ( typeof vnode.children === 'string') {
       el.textContent = `${el.textContent }${vnode.children}`
@@ -20,7 +20,8 @@ export function createRenderer() {
         el.setAttribute(key, vnode.props[key])
       }
     }
-    
+   
+    // insert
     container.insertBefore(el, null)
   }
 
