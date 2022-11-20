@@ -45,7 +45,7 @@ function trigger(target, key) {
   if (!deps) return
   for(let fn of deps) {
     if (fn.options.scheduler)
-      fn.options.scheduler()
+      fn.options.scheduler(fn)
     else
       fn()
   }
