@@ -17,16 +17,22 @@ function nextTick( fn ) {
   // return fn ? p.then(this ? fn.bind(this) : fn) : p
 }
 
+function watch(fn, cb) {
+  doWatch(fn, cb, undefined)
+}
+
 function watchEffect(fn) {
   doWatch(fn, null, undefined)
 }
 
 function doWatch(source, cb, options) {
-  reactiveEffect(source)
+  let getter = source
+  reactiveEffect(getter)
 }
 
 export {
   nextTick,
   reactive,
-  watchEffect
+  watchEffect,
+  watch
 }

@@ -2,6 +2,7 @@ import {
   watchEffect,
   reactive,
   nextTick,
+  watch,
   // ref,
   // defineComponent,
   // getCurrentInstance,
@@ -46,24 +47,24 @@ describe('api: watch', () => {
     expect(dummy).toBe(1)
   })
 
-  // it('watching single source: getter', async () => {
-  //   const state = reactive({ count: 0 })
-  //   let dummy
-  //   watch(
-  //     () => state.count,
-  //     (count, prevCount) => {
-  //       dummy = [count, prevCount]
-  //       // assert types
-  //       count + 1
-  //       if (prevCount) {
-  //         prevCount + 1
-  //       }
-  //     }
-  //   )
-  //   state.count++
-  //   await nextTick()
-  //   expect(dummy).toMatchObject([1, 0])
-  // })
+  xit('watching single source: getter', async () => {
+    const state = reactive({ count: 0 })
+    let dummy
+    watch(
+      () => state.count,
+      (count, prevCount) => {
+        dummy = [count, prevCount]
+        // assert types
+        count + 1
+        if (prevCount) {
+          prevCount + 1
+        }
+      }
+    )
+    state.count++
+    await nextTick()
+    expect(dummy).toMatchObject([1, 0])
+  })
 
   // it('watching single source: ref', async () => {
   //   const count = ref(0)
