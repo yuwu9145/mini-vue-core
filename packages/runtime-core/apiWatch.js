@@ -1,11 +1,8 @@
 import { 
   reactive,
   effect as reactiveEffect,
-  computed,
   ref,
-  toRef,
-  toRefs,
-  isRef
+  isRef,
 } from '../reactivity/reactive'
 
 const resolvedPromise = /*#__PURE__*/ Promise.resolve()
@@ -26,7 +23,14 @@ function watchEffect(fn) {
 }
 
 function doWatch(source, cb, options) {
-  let getter = source
+  let getter
+
+  if (typeof source === 'function') {
+    getter = source
+  } else {
+    getter = () => traverse(source)
+  }
+
   let oldValue, newValue
   
   if (cb) {
@@ -44,9 +48,29 @@ function doWatch(source, cb, options) {
   }
 }
 
+function traverse(value, seen) {
+  if (typeof value !== 'object' || value === null || seen?.has(value)) {
+    return value
+  }
+
+  if (!seen) seen = new Set()
+  seen.add(value)
+
+  if (isRef(value)) {
+    return traverse(value.value, seen)
+  } else {
+    // for (const k in value) {
+    //   traverse(value[k], seen)
+    // }
+  }
+
+  return value
+}
+
 export {
   nextTick,
   reactive,
   watchEffect,
-  watch
+  watch,
+  ref
 }
