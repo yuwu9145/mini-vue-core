@@ -27,10 +27,18 @@ function watchEffect(fn) {
 
 function doWatch(source, cb, options) {
   let getter = source
+  let oldValue, newValue
+  
   if (cb) {
-    reactiveEffect(getter, {
-      scheduler: cb
+    const effectFn = reactiveEffect(getter, {
+      scheduler: () => {
+        newValue = effectFn()
+        cb(newValue, oldValue)
+        oldValue = newValue
+      },
+      lazy: true
     })
+    oldValue = effectFn()
   } else {
     reactiveEffect(getter)
   }

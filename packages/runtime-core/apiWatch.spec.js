@@ -62,8 +62,8 @@ describe('api: watch', () => {
       }
     )
     state.count++
-    // await nextTick()
-    // expect(dummy).toMatchObject([1, 0])
+    await nextTick()
+    expect(dummy).toMatchObject([1, 0])
   })
 
   // it('watching single source: ref', async () => {
