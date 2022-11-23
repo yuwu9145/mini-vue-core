@@ -58,6 +58,10 @@ function traverse(value, seen) {
 
   if (isRef(value)) {
     return traverse(value.value, seen)
+  } else if(Array.isArray(value)) {
+    for(let i = 0; i < value.length; i++) {
+      traverse(value[i], seen)
+    }
   } else {
     // for (const k in value) {
     //   traverse(value[k], seen)

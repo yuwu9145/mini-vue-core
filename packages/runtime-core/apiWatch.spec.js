@@ -82,15 +82,15 @@ describe('api: watch', () => {
     expect(dummy).toMatchObject([1, 0])
   })
 
-  // it('watching single source: array', async () => {
-  //   const array = reactive([] as number[])
-  //   const spy = jest.fn()
-  //   watch(array, spy)
-  //   array.push(1)
-  //   await nextTick()
-  //   expect(spy).toBeCalledTimes(1)
-  //   expect(spy).toBeCalledWith([1], expect.anything(), expect.anything())
-  // })
+  it('watching single source: array', async () => {
+    const array = reactive([])
+    const spy = jest.fn()
+    watch(array, spy)
+    array.push(1)
+    await nextTick()
+    expect(spy).toBeCalledTimes(1)
+    // expect(spy).toBeCalledWith([1], expect.anything(), expect.anything())
+  })
 
   // it('should not fire if watched getter result did not change', async () => {
   //   const spy = jest.fn()
