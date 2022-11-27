@@ -89,7 +89,8 @@ describe('api: watch', () => {
     array.push(1)
     await nextTick()
     expect(spy).toBeCalledTimes(1)
-    // expect(spy).toBeCalledWith([1], expect.anything(), expect.anything())
+
+    expect(spy).toBeCalledWith([1], [1])
   })
 
   // it('should not fire if watched getter result did not change', async () => {

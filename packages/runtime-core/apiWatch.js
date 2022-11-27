@@ -3,7 +3,7 @@ import {
   effect as reactiveEffect,
   ref,
   isRef,
-} from '../reactivity/reactive'
+} from '../reactivity/reactive.js'
 
 const resolvedPromise = /*#__PURE__*/ Promise.resolve()
 
@@ -27,6 +27,11 @@ function doWatch(source, cb, options) {
 
   if (typeof source === 'function') {
     getter = source
+  } else if(Array.isArray(source)) {
+    // getter = () => source.map(s => traverse(s))
+    getter = () => {
+      return traverse(source)
+    }
   } else {
     getter = () => traverse(source)
   }
@@ -42,7 +47,8 @@ function doWatch(source, cb, options) {
       },
       lazy: true
     })
-    oldValue = effectFn()
+    const oldValResult = effectFn()
+    oldValue = oldValResult
   } else {
     reactiveEffect(getter)
   }
@@ -58,13 +64,15 @@ function traverse(value, seen) {
 
   if (isRef(value)) {
     return traverse(value.value, seen)
-  } else if(Array.isArray(value)) {
-    for(let i = 0; i < value.length; i++) {
-      traverse(value[i], seen)
-    }
   } else {
     // for (const k in value) {
     //   traverse(value[k], seen)
+    // }
+    for (let i = 0; i < value.length; i++) {
+      traverse(value[i], seen)
+    }
+    // for(let i = 0; i < value.length; i++) {
+    //   traverse(value[i], seen)
     // }
   }
 
